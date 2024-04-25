@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
+/* Clase buffer. */
 public class Buffer {
     private double[] buffer;
     private Semaphore mutex;
@@ -14,6 +15,7 @@ public class Buffer {
     private int out;
     List<Integer> buff;
 
+    /* Constructor. */
     public Buffer(int size) {
         buffer = new double[size];
         mutex = new Semaphore(1);
@@ -53,6 +55,7 @@ public class Buffer {
         }
     }
 
+    /* Mediante el uso de semáforos inserta un elemento en el buffer. */
     public void produce(double item) throws InterruptedException {
         empty.acquire();
         mutex.acquire();
@@ -62,6 +65,7 @@ public class Buffer {
         full.release();
     }
 
+    /* Mediante el uso de semáforos quita un elemento del buffer y lo devuelve. */
     public double consume() throws InterruptedException {
         full.acquire();
         mutex.acquire();
