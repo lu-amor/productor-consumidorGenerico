@@ -1,13 +1,16 @@
 package com.example;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class App extends Thread
 {
+    Buffer buffer = new Buffer(30);
+
+    public void run() {
+        Productor productor = new Productor(buffer);
+        Consumidor consumidor = new Consumidor(buffer);
+    }
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        App procesos = new App();
+        procesos.start();
     }
 }
