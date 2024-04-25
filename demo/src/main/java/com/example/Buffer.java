@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class Buffer {
-    private int[] buffer;
+    private double[] buffer;
     private Semaphore mutex;
     private Semaphore empty;
     private Semaphore full;
@@ -15,7 +15,7 @@ public class Buffer {
     List<Integer> buff;
 
     public Buffer(int size) {
-        buffer = new int[size];
+        buffer = new double[size];
         mutex = new Semaphore(1);
         empty = new Semaphore(size);
         full = new Semaphore(0);
@@ -53,7 +53,7 @@ public class Buffer {
         }
     }
 
-    public void produce(int item) throws InterruptedException {
+    public void produce(double item) throws InterruptedException {
         empty.acquire();
         mutex.acquire();
         buffer[in] = item;
@@ -62,10 +62,10 @@ public class Buffer {
         full.release();
     }
 
-    public int consume() throws InterruptedException {
+    public double consume() throws InterruptedException {
         full.acquire();
         mutex.acquire();
-        int item = buffer[out];
+        double item = buffer[out];
         out = (out + 1) % buffer.length;
         mutex.release();
         empty.release();

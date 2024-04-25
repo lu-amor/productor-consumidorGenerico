@@ -1,6 +1,6 @@
 package com.example;
 
-public class Consumidor {
+public class Consumidor extends Thread {
     private Buffer buffer;
 
     public Consumidor(Buffer buffer) {
@@ -10,7 +10,7 @@ public class Consumidor {
     public void run() {
         try {
             while (true) {
-                int item = buffer.consume();
+                double item = buffer.consume();
                 System.out.println(item);
             }
         } catch (InterruptedException e) {

@@ -7,6 +7,9 @@ public class App extends Thread
     public void run() {
         Productor productor = new Productor(buffer);
         Consumidor consumidor = new Consumidor(buffer);
+
+        productor.start();
+        consumidor.start();
     }
     public static void main( String[] args )
     {
