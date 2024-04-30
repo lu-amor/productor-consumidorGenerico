@@ -7,13 +7,13 @@ import java.util.concurrent.Semaphore;
 
 /* Clase buffer. */
 public class Buffer {
-    private double[] buffer;
-    private Semaphore mutex;
-    private Semaphore empty;
-    private Semaphore full;
-    private int in;
-    private int out;
-    List<Integer> buff;
+    private double[] buffer;   // Array para guardar los elementos del buffer.
+    private Semaphore mutex;   // Semáforo de mutua exclusión.
+    private Semaphore empty;   // Semáforo para controlar si el buffer está vacío.
+    private Semaphore full;    // Semáforo para controlar si el buffer está lleno.
+    private int in;            // Índice de inserción.
+    private int out;           // Índice de extracción.
+    
 
     /* Constructor. */
     public Buffer(int size) {
@@ -23,36 +23,6 @@ public class Buffer {
         full = new Semaphore(0);
         in = 0;
         out = 0;
-        buff = new ArrayList<Integer>();
-    }
-
-    public int getLength() {
-        return buff.size();
-    }
-
-    public List<Integer> get() {
-        return buff;
-    }
-    public int getBy(int index) {
-        return buff.get(index);
-    }
-
-    public void push(int value) {
-        buff.add(value);
-    }
-
-    public void pop() {
-        buff.remove(buff.size() - 1);
-    }
-    public void popBy(int index) {
-        buff.remove(index);
-    }
-    public void popRandom() {
-        if (!buff.isEmpty()) {
-            Random random = new Random();
-            int index = random.nextInt(buff.size());
-            buff.remove(index);
-        }
     }
 
     /* Mediante el uso de semáforos inserta un elemento en el buffer. */
