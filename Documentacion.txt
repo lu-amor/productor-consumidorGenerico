@@ -1,0 +1,13 @@
+Documentacion:
+
+Para poder resolver el problema de Productor Consumidor lo que hicimos fue implementar el uso de tres semaforos:
+mutex, empty,full
+Cada uno de estos semaforos se encanga de realizar diferentes procesos:
+-mutex que garantiza mutua exclusion para acceder al buffer, es decir que solo un hilo (procesos) a la vez pueda realizar operaciones en el buffer, como quitar o agregar elementos
+-empty que controla cuantos elementos vacios hay en el buffer para que los productores puedan agregar elementos.
+-full que controla cuantos elementos hay en el buffer y estan listos para que los consumidores los consuman.
+
+La concurrencia funciona a partir de 2 hilos (procesos) que operan sobre una instancia del buffer.
+El metodo run de la clase App crea 2 instancias (1 de cada proceso).
+Al llamar al metodo start de App se ejecutan los metodos run de productor y consumidor, logrando el 'cobegin' y 'coend'.
+Luego los semáforos controlan el acceso al buffer para que no se generen deadlocks y arbitren la entrada y salida de datos en el buffer.
